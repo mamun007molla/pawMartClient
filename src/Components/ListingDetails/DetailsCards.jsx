@@ -12,7 +12,7 @@ const DetailsCards = () => {
   const [listings, setListings] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/listing/${id}`)
+      .get(`https://paw-mart-server-fawn.vercel.app/listing/${id}`)
       .then((res) => setListings(res.data));
   }, [id]);
 
@@ -21,7 +21,6 @@ const DetailsCards = () => {
 
   return (
     <div className="">
-      
       <main>
         {listings ? (
           <div className="w-11/12 mx-auto">
@@ -37,14 +36,12 @@ const DetailsCards = () => {
 
                   <p>{`Email: ${email}`}</p>
                   <p>{`Address: ${location}`}</p>
-                  
 
                   <dialog id="my_modal_1" className="modal">
                     <div className="modal-box">
                       <OrderForm listing={listings} />
                       <div className="modal-action">
                         <form method="dialog">
-                         
                           <button className="btn">Close</button>
                         </form>
                       </div>

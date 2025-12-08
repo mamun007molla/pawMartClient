@@ -32,7 +32,7 @@ const Login = () => {
     
   };
   const handleGoogleSignIn = () => {
-    // Implement Google Sign-In logic here
+    
     signInWithGoogle()
       .then((result) => {
         const loggedUser = result.user;

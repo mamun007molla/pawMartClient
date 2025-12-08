@@ -11,7 +11,7 @@ const Cards = () => {
   const [searchText, setSearchText] = useState("");
   useEffect(() => {
     axios
-      .get("http://localhost:3000/listing")
+      .get("https://paw-mart-server-fawn.vercel.app/listing")
       .then((res) => setListings(res.data));
   }, []);
   const filteredListings = useMemo(() => {
@@ -31,7 +31,6 @@ const Cards = () => {
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4">
-       
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
           <h2 className="text-3xl font-bold text-gray-800">
             Available Listings

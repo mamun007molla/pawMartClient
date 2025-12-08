@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
-import { use } from 'react';
+import { use } from "react";
 
 const MylistTable = () => {
   const { user } = use(AuthContext);
@@ -15,7 +15,7 @@ const MylistTable = () => {
     if (!user?.email) return;
 
     axios
-      .get(`http://localhost:3000/listing/user/${user.email}`)
+      .get(`https://paw-mart-server-fawn.vercel.app/listing/user/${user.email}`)
       .then((res) => setListings(res.data));
   }, [user]);
 
@@ -28,13 +28,19 @@ const MylistTable = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3000/listing/${id}`).then((res) => {
-          if (res.data.deletedCount > 0) {
-            Swal.fire("Deleted!", "Your listing has been removed.", "success");
+        axios
+          .delete(`https://paw-mart-server-fawn.vercel.app/listing/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              Swal.fire(
+                "Deleted!",
+                "Your listing has been removed.",
+                "success"
+              );
 
-            setListings(listings.filter((item) => item._id !== id));
-          }
-        });
+              setListings(listings.filter((item) => item._id !== id));
+            }
+          });
       }
     });
   };

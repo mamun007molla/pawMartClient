@@ -6,8 +6,8 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { useNavigate } from "react-router";
 
 const ProductForm = () => {
-    const {user}=use(AuthContext)
-    const navigate=useNavigate()
+  const { user } = use(AuthContext);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     category: "pets",
@@ -19,12 +19,10 @@ const ProductForm = () => {
     date: "",
   });
 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     if (name === "category") {
-      
       if (value === "pets") {
         setFormData((prev) => ({
           ...prev,
@@ -35,12 +33,11 @@ const ProductForm = () => {
         setFormData((prev) => ({
           ...prev,
           category: value,
-          price: prev.price, 
+          price: prev.price,
         }));
       }
       return;
     }
-
 
     setFormData((prev) => ({
       ...prev,
@@ -48,19 +45,20 @@ const ProductForm = () => {
     }));
   };
 
-  
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post("http://localhost:3000/listing", formData).then((res) => {
-      console.log("Saved:", res.data);
-      Swal.fire({
-        title: "Good job!",
-        text: "Your item is added!",
-        icon: "success",
+    axios
+      .post("https://paw-mart-server-fawn.vercel.app/listing", formData)
+      .then((res) => {
+        console.log("Saved:", res.data);
+        Swal.fire({
+          title: "Good job!",
+          text: "Your item is added!",
+          icon: "success",
+        });
+        navigate("/petSupplies");
       });
-      navigate("/petSupplies")
-    });
 
     e.target.reset();
   };

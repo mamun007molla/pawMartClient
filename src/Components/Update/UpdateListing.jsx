@@ -16,7 +16,7 @@ const UpdateListing = () => {
   ];
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/listing/${id}`).then((res) => {
+    axios.get(`https://paw-mart-server-fawn.vercel.app/listing/${id}`).then((res) => {
       setListing(res.data);
     });
   }, [id]);
@@ -24,7 +24,7 @@ const UpdateListing = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Auto set price = 0 for Pets
+    
     if (name === "category" && value === "Pets") {
       setListing((prev) => ({ ...prev, price: 0, category: value }));
       return;
@@ -39,7 +39,7 @@ const UpdateListing = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.put(`http://localhost:3000/listing/${id}`, listing).then((res) => {
+    axios.put(`https://paw-mart-server-fawn.vercel.app/listing/${id}`, listing).then((res) => {
       Swal.fire({
         title: "Updated!",
         text: "Listing updated successfully",
@@ -48,7 +48,7 @@ const UpdateListing = () => {
       });
       console.log(res);
 
-      navigate("/myList"); // redirect to dashboard
+      navigate("/myList"); 
     });
   };
 

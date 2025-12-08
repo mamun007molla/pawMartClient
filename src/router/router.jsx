@@ -9,6 +9,10 @@ import Login from "../Components/Authentication/Login";
 import Register from "../Components/Authentication/Register";
 import MyListing from "../Pages/MyListing";
 import UpdateListing from "../Components/Update/UpdateListing";
+import MyOrder from "../Pages/MyOrder";
+import PageNotFound from "../Pages/PageNotFound";
+import PrivateRoute from "../Provider/PrivateRoute";
+import CategoryFilteredProduct from "../Components/Home/CategoryFilteredProduct";
 
 
 export const router = createBrowserRouter([
@@ -18,36 +22,54 @@ export const router = createBrowserRouter([
     children:[
         {
             index:true,
-            element:<Home/>
+            element:<Home/>,
+            errorElement:<PageNotFound></PageNotFound>
         },
         {
             path:'/addListing',
-            element:<AddListingPages/>
+            element:<PrivateRoute><AddListingPages/></PrivateRoute>,
+            errorElement:<PageNotFound></PageNotFound>
         },
         {
             path:'/petSupplies',
-            element:<PetsSupplies/>
+            element:<PetsSupplies/>,
+            errorElement:<PageNotFound></PageNotFound>
         },
         {
             path:'/myList',
-            element:<MyListing/>
+            element:<PrivateRoute><MyListing/></PrivateRoute>,
+            errorElement:<PageNotFound></PageNotFound>
         },
         {
             path:"/listing/:id",
-            element:<ListingDetails/>
+            element:<PrivateRoute><ListingDetails/></PrivateRoute>,
+            errorElement:<PageNotFound></PageNotFound>
         },
         {
             path:"/login",
-            element:<Login/>
+            element:<Login/>,
+            errorElement:<PageNotFound></PageNotFound>
         },
         {
             path:"/register",
-            element:<Register/>
+            element:<Register/>,
+            errorElement:<PageNotFound></PageNotFound>
         },
         {
             path:'/update-listing/:id',
-            element:<UpdateListing></UpdateListing>
+            element:<UpdateListing></UpdateListing>,
+            errorElement:<PageNotFound></PageNotFound>
+        },
+        {
+            path:"/my-orders",
+            element:<PrivateRoute><MyOrder></MyOrder></PrivateRoute>,
+            errorElement:<PageNotFound></PageNotFound>
+        },
+        {
+            path:"/category-filtered-product/:categoryName",
+            element:<CategoryFilteredProduct></CategoryFilteredProduct>
         }
-    ]
+    ],
+    errorElement:<PageNotFound></PageNotFound>
   },
 ]);

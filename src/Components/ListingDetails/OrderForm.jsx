@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 import { use } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { useNavigate } from "react-router";
 
-const OrderForm = ({ listing}) => {
-  const {user}=use(AuthContext)
+const OrderForm = ({ listing }) => {
+  const { user } = use(AuthContext);
+  const navigate = useNavigate();
   console.log(user.displayName);
   if (!listing) return <p>Loading...</p>;
 
@@ -24,7 +26,6 @@ const OrderForm = ({ listing}) => {
     additionalNotes: "",
   });
 
-  
   useEffect(() => {
     if (!listing) return;
 
@@ -53,23 +54,25 @@ const OrderForm = ({ listing}) => {
 
     console.log("Order Submitted:", formData);
 
-    axios.post("http://localhost:3000/order", formData).then((res) => {
-      console.log("Saved:", res.data);
-      Swal.fire({
-        title: "Good job!",
-        text: "Your order is placed!",
-        icon: "success",
-      });
+    axios
+      .post("https://paw-mart-server-fawn.vercel.app/order", formData)
+      .then((res) => {
+        console.log("Saved:", res.data);
 
-      // state reset
-      setFormData((prev) => ({
-        ...prev,
-        address: "",
-        phone: "",
-        date: "",
-        additionalNotes: "",
-      }));
-    });
+        setFormData((prev) => ({
+          ...prev,
+          address: "",
+          phone: "",
+          date: "",
+          additionalNotes: "",
+        }));
+        Swal.fire({
+          title: "Good job!",
+          text: "Your order is placed!",
+          icon: "success",
+        });
+        navigate("/my-orders");
+      });
   };
 
   return (
@@ -156,9 +159,7 @@ const OrderForm = ({ listing}) => {
           name="price"
           readOnly
           value={
-            formData.price === 0
-              ? "Free for Adoption"
-              : `৳ ${formData.price}`
+            formData.price === 0 ? "Free for Adoption" : `৳ ${formData.price}`
           }
           className="w-full border rounded-lg px-3 py-2 bg-gray-100 cursor-not-allowed"
         />
