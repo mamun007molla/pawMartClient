@@ -3,10 +3,12 @@ import Root from "../Layout/Root";
 import Home from "../Pages/Home";
 import AddListingPages from "../Pages/AddListingPages";
 import PetsSupplies from "../Pages/PetsSupplies";
-import MylistTable from "../Components/MyListing/MylistTable";
+
 import ListingDetails from "../Pages/ListingDetails";
 import Login from "../Components/Authentication/Login";
 import Register from "../Components/Authentication/Register";
+import MyListing from "../Pages/MyListing";
+import UpdateListing from "../Components/Update/UpdateListing";
 
 
 export const router = createBrowserRouter([
@@ -28,7 +30,7 @@ export const router = createBrowserRouter([
         },
         {
             path:'/myList',
-            element:<MylistTable/>
+            element:<MyListing/>
         },
         {
             path:"/listing/:id",
@@ -41,6 +43,10 @@ export const router = createBrowserRouter([
         {
             path:"/register",
             element:<Register/>
+        },
+        {
+            path:'/update-listing/:id',
+            element:<UpdateListing></UpdateListing>
         }
     ]
   },

@@ -3,9 +3,11 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { use } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { useNavigate } from "react-router";
 
 const ProductForm = () => {
     const {user}=use(AuthContext)
+    const navigate=useNavigate()
   const [formData, setFormData] = useState({
     name: "",
     category: "pets",
@@ -57,6 +59,7 @@ const ProductForm = () => {
         text: "Your item is added!",
         icon: "success",
       });
+      navigate("/petSupplies")
     });
 
     e.target.reset();
