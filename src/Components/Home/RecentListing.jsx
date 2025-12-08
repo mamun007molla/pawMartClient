@@ -1,58 +1,17 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router";
 
 
 const RecentListing = () => {
-  const cards = [
-    {
-    id: "123",
-    name: "Golden Retriever Puppy",
-    category: "Pets (Adoption)",
-    price: 0,
-    location: "Dhaka, Bangladesh",
-    image: "https://i.ibb.co/ZV1yP1X/dog.jpg",
-  },
-  {
-    id: "123",
-    name: "Golden Retriever Puppy",
-    category: "Pets (Adoption)",
-    price: 0,
-    location: "Dhaka, Bangladesh",
-    image: "https://i.ibb.co/ZV1yP1X/dog.jpg",
-  },
-  {
-    id: "123",
-    name: "Golden Retriever Puppy",
-    category: "Pets (Adoption)",
-    price: 0,
-    location: "Dhaka, Bangladesh",
-    image: "https://i.ibb.co/ZV1yP1X/dog.jpg",
-  },
-  {
-    id: "123",
-    name: "Golden Retriever Puppy",
-    category: "Pets (Adoption)",
-    price: 0,
-    location: "Dhaka, Bangladesh",
-    image: "https://i.ibb.co/ZV1yP1X/dog.jpg",
-  },
-  {
-    id: "123",
-    name: "Golden Retriever Puppy",
-    category: "Pets (Adoption)",
-    price: 0,
-    location: "Dhaka, Bangladesh",
-    image: "https://i.ibb.co/ZV1yP1X/dog.jpg",
-  },
-  {
-    id: "123",
-    name: "Golden Retriever Puppy",
-    category: "Pets (Adoption)",
-    price: 0,
-    location: "Dhaka, Bangladesh",
-    image: "https://i.ibb.co/ZV1yP1X/dog.jpg",
-  }
-  ]
+  const[cards,setCards]=useState([])
+
+  useEffect(()=>{
+    axios.get("http://localhost:3000/recentListing")
+    .then(res=>setCards(res.data))
+  },[])
   
   return (
     <div className="grid grid-cols-3 gap-3">
