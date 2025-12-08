@@ -1,7 +1,10 @@
 import React from "react";
-import { NavLink } from "react-router";
+import { use } from "react";
+import { Link, NavLink } from "react-router";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Navbar = () => {
+    const {user,signOutUser}=use(AuthContext)
   const link = (
     <>
       <li>
@@ -10,6 +13,7 @@ const Navbar = () => {
       <li>
         <NavLink to="/petSupplies">Pet & Supplies</NavLink>
       </li>
+      {user && <>
       <li>
         <NavLink to="/addListing">Add Listing</NavLink>
       </li>
@@ -19,8 +23,12 @@ const Navbar = () => {
       <li>
         <NavLink to="/myOrder">My Orders</NavLink>
       </li>
+      </>}
     </>
   );
+  const handleSignout = () => {
+    signOutUser();
+  };
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -62,10 +70,24 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{link}</ul>
       </div>
-      <div className="navbar-end space-x-1.5">
-        <a className="btn">Login</a>
-        <a className="btn">Register</a>
-      </div>
+      
+      {user?<div className="flex gap-5 navbar-end">
+        {!user?<CgProfile size={30}/>:user.photoURL ? (
+          <img
+            title={user.displayName}
+            src={user.photoURL}
+            className="w-8 h-8 rounded-full"
+          />
+        ) : (
+          <CgProfile size={30}/>
+        )}
+         <Link onClick={handleSignout} className="btn btn-secondary">
+            LogOut
+          </Link>
+      </div>:<div className="navbar-end space-x-1.5">
+        <Link to="/login" className="btn">Login</Link>
+        <Link to="/register" className="btn">Register</Link>
+      </div>}
     </div>
   );
 };

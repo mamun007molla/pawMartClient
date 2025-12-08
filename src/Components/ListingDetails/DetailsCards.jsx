@@ -21,9 +21,7 @@ const DetailsCards = () => {
 
   return (
     <div className="">
-      <header className="py-3">
-        <Navbar />
-      </header>
+      
       <main>
         {listings ? (
           <div className="w-11/12 mx-auto">

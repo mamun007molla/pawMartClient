@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { use } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../Provider/AuthProvider";
 
-const OrderForm = ({ listing, user }) => {
-  
+const OrderForm = ({ listing}) => {
+  const {user}=use(AuthContext)
+  console.log(user.displayName);
   if (!listing) return <p>Loading...</p>;
 
   const isPet = listing.category === "Pets";
@@ -27,7 +30,7 @@ const OrderForm = ({ listing, user }) => {
 
     setFormData((prev) => ({
       ...prev,
-      buyerName: user?.name || "",
+      buyerName: user?.displayName || "",
       email: user?.email || "",
       productId: listing._id,
       productName: listing.name,

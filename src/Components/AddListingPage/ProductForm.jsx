@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { use } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const ProductForm = () => {
+    const {user}=use(AuthContext)
   const [formData, setFormData] = useState({
     name: "",
     category: "pets",
@@ -10,7 +13,7 @@ const ProductForm = () => {
     location: "",
     description: "",
     image: "",
-    email: "",
+    email: user?.email || "",
     date: "",
   });
 

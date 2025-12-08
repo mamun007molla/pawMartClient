@@ -16,7 +16,7 @@ const RecentListing = () => {
   return (
     <div className="grid grid-cols-3 gap-3">
       {cards.map(card => (
-        <div  key={card.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition flex ">
+        <div  key={card._id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition flex ">
           <img src={card.image} alt={card.name} className="w-40 h-40 object-cover " />
 
           <div className="p-4">
@@ -30,7 +30,7 @@ const RecentListing = () => {
             <p className="text-sm text-gray-600 mt-1">📍 {card.location}</p>
 
             <Link
-              to={`/listing/${card.id}`}
+              to={`/listing/${card._id}`}
               className="mt-4 inline-block bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition"
             >
               See Details

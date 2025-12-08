@@ -5,6 +5,8 @@ import AddListingPages from "../Pages/AddListingPages";
 import PetsSupplies from "../Pages/PetsSupplies";
 import MylistTable from "../Components/MyListing/MylistTable";
 import ListingDetails from "../Pages/ListingDetails";
+import Login from "../Components/Authentication/Login";
+import Register from "../Components/Authentication/Register";
 
 
 export const router = createBrowserRouter([
@@ -31,6 +33,14 @@ export const router = createBrowserRouter([
         {
             path:"/listing/:id",
             element:<ListingDetails/>
+        },
+        {
+            path:"/login",
+            element:<Login/>
+        },
+        {
+            path:"/register",
+            element:<Register/>
         }
     ]
   },
